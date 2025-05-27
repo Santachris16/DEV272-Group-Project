@@ -17,7 +17,7 @@ Objectives
 •	Required Features:
 o	Navigation across 4 screens
 o	2 forms with validation (filter input, feedback form)
-o	Remote data storage (e.g., user preferences using Firebase)
+o	Remote data storage (e.g., user preferences using SupaBase)
 o	API data fetching (restaurant data)
 •	Validate app viability through prototyping and user testing.
 •	Demonstrate understanding of mobile development principles, project management, and teamwork.
@@ -33,7 +33,7 @@ Week 1: Planning and Setup
 Deliverables:
 •	Project proposal – Christian
 •	Wireframes & user flow – Chris
-•	GitHub repo setup with folder structure – Christian________________________________________
+•	GitHub repo setup with folder structure - Christian/Chris
 Week 2: UI & Navigation Setup
 •	Implement React Navigation for 4-screen flow
 •	Build static versions of Home, Filter, Result, and Feedback screens
