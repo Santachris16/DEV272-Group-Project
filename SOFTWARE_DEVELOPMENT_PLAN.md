@@ -39,9 +39,9 @@ Week 2: UI & Navigation Setup
 •	Build static versions of Home, Filter, Result, and Feedback screens
 •	Connect components with navigation logic
 Deliverables:
-•	Basic navigation & screen routing – TBD
-•	Static screen designs implemented – TBD
-•	Navigation tested across devices – TBD
+•	Basic navigation & screen routing – Christian 
+•	Static screen designs implemented – Chris / christian
+•	Navigation tested across devices – Chris
 ________________________________________
 Week 3: Forms & Validation
 •	Build 2 functional forms: restaurant filter form and feedback form
