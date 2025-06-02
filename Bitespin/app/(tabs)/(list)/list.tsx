@@ -16,7 +16,7 @@ export default function ListScreen() {
 
   return (
     <Box>
-      <Heading size="3xl" className="self-center">
+      <Heading size="3xl" className="self-center p-2">
         Restaurant List
       </Heading>
       <TextInput placeholder="Search Restaurants" />
