@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { View, Text, TextInput, Button } from 'react-native';
 
 export default function AddItemScreen() {
@@ -10,6 +11,7 @@ export default function AddItemScreen() {
       <TextInput placeholder="Rating" />
       <TextInput placeholder="Visited (true/false)" />
       <Button title="Confirm" onPress={() => alert('Added!')} />
+      <Button title="Return" onPress={() => router.push('/list')} />
     </View>
   );
 }

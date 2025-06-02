@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
+import { Button } from '@/components/ui/button';
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
