@@ -13,7 +13,7 @@ export default function HomeScreen() {
       
       <Heading size="3xl" className="self-center mt-2">Bitespin</Heading>
       <Text className="self-center">Random restaurant picker</Text>
-      <Box className='flex-1 p-1 m-2'>
+      <Box className='flex-1 p-1 ml-2 mr-2'>
 
         <Button 
           className='flex-1 m-2 rounded-2xl'

@@ -1,4 +1,4 @@
-import { TextInput, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 import restaurantsData from '../../../data/restaurantsList.json';
@@ -10,6 +10,7 @@ import { Fab, FabIcon } from '@/components/ui/fab';
 import { AddIcon, EditIcon, FavouriteIcon } from '@/components/ui/icon';
 import { Button, ButtonIcon } from '@/components/ui/button';
 import { HStack } from '@/components/ui/hstack';
+import { Input, InputField } from '@/components/ui/input';
 
 export default function ListScreen() {
   const router = useRouter();
@@ -19,7 +20,9 @@ export default function ListScreen() {
       <Heading size="3xl" className="self-center p-2">
         Restaurant List
       </Heading>
-      <TextInput placeholder="Search Restaurants" />
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder="Search Restaurants..."></InputField>
+      </Input>
       <FlatList
         data={restaurantsData}
         keyExtractor={(item) => item.id} 
