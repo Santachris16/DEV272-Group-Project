@@ -1,6 +1,6 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import { Button } from '@/components/ui/button';
+
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
@@ -11,6 +11,7 @@ export default function DetailsScreen() {
       <Text>[Image Placeholder]</Text>
       <Text>[Info: Genre, Rating, Location, Visited]</Text>
       <Text>[Description Placeholder]</Text>
+      <Button title='Return' onPress={() => router.back()}/>
     </View>
   );
 }
