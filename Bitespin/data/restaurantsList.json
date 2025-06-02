@@ -6,7 +6,8 @@
     "location": "123 Main St, Anytown, USA",
     "photo": "https://example.com/photos/golden_spoon.jpg",
     "rating": 4.5,
-    "visited": true
+    "visited": true,
+    "favorite": true
   },
   {
     "id": "2",
@@ -15,7 +16,8 @@
     "location": "456 Oak Ave, Anytown, USA",
     "photo": "https://example.com/photos/spice_route.jpg",
     "rating": 4.8,
-    "visited": false
+    "visited": false,
+    "favorite": false
   },
   {
     "id": "3",
@@ -24,7 +26,8 @@
     "location": "789 Pine Ln, Anytown, USA",
     "photo": "https://example.com/photos/sushi_heaven.jpg",
     "rating": 4.2,
-    "visited": true
+    "visited": true,
+    "favorite": true
   },
   {
     "id": "4",
@@ -33,7 +36,8 @@
     "location": "101 Maple Dr, Anytown, USA",
     "photo": "https://example.com/photos/burger_barn.jpg",
     "rating": 3.9,
-    "visited": false
+    "visited": false,
+    "favorite": false
   },
   {
     "id": "5",
@@ -42,7 +46,8 @@
     "location": "202 Birch Rd, Anytown, USA",
     "photo": "https://example.com/photos/taco_fiesta.jpg",
     "rating": 4.6,
-    "visited": true
+    "visited": true,
+    "favorite": true
   },
   {
     "id": "6",
@@ -51,7 +56,8 @@
     "location": "303 Cedar Blvd, Anytown, USA",
     "photo": "https://example.com/photos/le_croissant.jpg",
     "rating": 4.9,
-    "visited": true
+    "visited": true,
+    "favorite": true
   },
   {
     "id": "7",
@@ -60,7 +66,8 @@
     "location": "404 Willow Way, Anytown, USA",
     "photo": "https://example.com/photos/pho_king.jpg",
     "rating": 4.3,
-    "visited": false
+    "visited": false,
+    "favorite": false
   },
   {
     "id": "8",
@@ -69,7 +76,8 @@
     "location": "505 Spruce St, Anytown, USA",
     "photo": "https://example.com/photos/med_grill.jpg",
     "rating": 4.0,
-    "visited": true
+    "visited": true,
+    "favorite": false
   },
   {
     "id": "9",
@@ -78,7 +86,8 @@
     "location": "606 Elm Pl, Anytown, USA",
     "photo": "https://example.com/photos/veggie_patch.jpg",
     "rating": 4.7,
-    "visited": false
+    "visited": false,
+    "favorite": true
   },
   {
     "id": "10",
@@ -87,6 +96,7 @@
     "location": "707 Aspen Ct, Anytown, USA",
     "photo": "https://example.com/photos/bbq_pit.jpg",
     "rating": 4.4,
-    "visited": true
+    "visited": true,
+    "favorite": false
   }
 ]
