@@ -27,13 +27,6 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="(favorites)"
-        options={{
-          title: 'Favorites',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="(home)"
         options={{
           title: 'Home',
@@ -45,6 +38,13 @@ export default function TabLayout() {
         options={{
           title: 'List',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="(favorites)"
+        options={{
+          title: 'Favorites',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="heart.fill" color={color} />,
         }}
       />
     </Tabs>

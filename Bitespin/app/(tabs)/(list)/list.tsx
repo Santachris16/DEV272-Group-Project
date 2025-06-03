@@ -30,18 +30,18 @@ export default function ListScreen() {
           <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/details/${item.id}`)}>
             <Card size="md" variant="elevated" className="m-3">
               <HStack space="md">
-                <Box>
+                <Box className='flex-2 justify-center'>
                   <Button onPress={() => router.push(`/(tabs)/(list)/edit/${item.id}`)}>
                     <ButtonIcon as={EditIcon}></ButtonIcon>
                   </Button>
                 </Box>
-                <Box>
-                  <Heading size="md" className="mb-1">
+                <Box className='flex-1'>
+                  <Heading size="md" className="mb-1 text-center">
                     {item.title}
                   </Heading>
-                  <Text size="sm">{item.location}</Text>
+                  <Text size="sm" className='text-center'>{item.location}</Text>
                 </Box>
-                <Box>
+                <Box className='flex-2 justify-center'>
                   <Button onPress={() =>{item.favorite}}>
                     <ButtonIcon 
                       as={FavouriteIcon}
