@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "title": "The Golden Spoon",
+    "genre": "Italian",
+    "location": "123 Main St, Anytown, USA",
+    "photo": "https://example.com/photos/golden_spoon.jpg",
+    "rating": 4.5,
+    "visited": true,
+    "favorite": true
+  },
+  {
+    "id": "2",
+    "title": "Spice Route",
+    "genre": "Indian",
+    "location": "456 Oak Ave, Anytown, USA",
+    "photo": "https://example.com/photos/spice_route.jpg",
+    "rating": 4.8,
+    "visited": false,
+    "favorite": false
+  },
+  {
+    "id": "3",
+    "title": "Sushi Heaven",
+    "genre": "Japanese",
+    "location": "789 Pine Ln, Anytown, USA",
+    "photo": "https://example.com/photos/sushi_heaven.jpg",
+    "rating": 4.2,
+    "visited": true,
+    "favorite": true
+  },
+  {
+    "id": "4",
+    "title": "Burger Barn",
+    "genre": "American",
+    "location": "101 Maple Dr, Anytown, USA",
+    "photo": "https://example.com/photos/burger_barn.jpg",
+    "rating": 3.9,
+    "visited": false,
+    "favorite": false
+  },
+  {
+    "id": "5",
+    "title": "Taco Fiesta",
+    "genre": "Mexican",
+    "location": "202 Birch Rd, Anytown, USA",
+    "photo": "https://example.com/photos/taco_fiesta.jpg",
+    "rating": 4.6,
+    "visited": true,
+    "favorite": true
+  },
+  {
+    "id": "6",
+    "title": "Le Croissant Dore",
+    "genre": "French",
+    "location": "303 Cedar Blvd, Anytown, USA",
+    "photo": "https://example.com/photos/le_croissant.jpg",
+    "rating": 4.9,
+    "visited": true,
+    "favorite": true
+  },
+  {
+    "id": "7",
+    "title": "Pho King",
+    "genre": "Vietnamese",
+    "location": "404 Willow Way, Anytown, USA",
+    "photo": "https://example.com/photos/pho_king.jpg",
+    "rating": 4.3,
+    "visited": false,
+    "favorite": false
+  },
+  {
+    "id": "8",
+    "title": "Mediterranean Grill",
+    "genre": "Greek",
+    "location": "505 Spruce St, Anytown, USA",
+    "photo": "https://example.com/photos/med_grill.jpg",
+    "rating": 4.0,
+    "visited": true,
+    "favorite": false
+  },
+  {
+    "id": "9",
+    "title": "The Veggie Patch",
+    "genre": "Vegetarian",
+    "location": "606 Elm Pl, Anytown, USA",
+    "photo": "https://example.com/photos/veggie_patch.jpg",
+    "rating": 4.7,
+    "visited": false,
+    "favorite": true
+  },
+  {
+    "id": "10",
+    "title": "BBQ Pit Stop",
+    "genre": "Barbecue",
+    "location": "707 Aspen Ct, Anytown, USA",
+    "photo": "https://example.com/photos/bbq_pit.jpg",
+    "rating": 4.4,
+    "visited": true,
+    "favorite": false
+  }
+]
