@@ -8,13 +8,17 @@ import RestaurantCard from "@/components/RestaurantCard";
 
 
 export default function FavoritesScreen() {
-  const favRestaurants = restaurantsData.filter(item => item.favorite === true)
+  
+  const [ favoriteRestaurants, setFavoriteRestaurants ] = useState(
+    restaurantsData.filter(item => item.favorite === true)
+  );
+
   const [ searchQuery, setSearchQuery ] = useState('');
-  const [ filteredData, setFilteredData ] = useState(restaurantsData);
+  const [ filteredData, setFilteredData ] = useState(favoriteRestaurants);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const filtered = favRestaurants.filter((item) =>
+    const filtered = favoriteRestaurants.filter((item) =>
       item.title.toLowerCase().includes(query.toLowerCase()),
     );
     setFilteredData(filtered);
