@@ -9,10 +9,22 @@ import { Text } from '@/components/ui/text';
 import { EditIcon, FavouriteIcon } from "@/components/ui/icon";
 import { router } from "expo-router";
 import restaurantsData from '../../../data/restaurantsList.json';
+import { useState } from "react";
+import RestaurantCard from "@/components/RestaurantCard";
 
 
 export default function FavoritesScreen() {
   const favRestaurants = restaurantsData.filter(item => item.favorite === true)
+  const [ searchQuery, setSearchQuery ] = useState('');
+  const [ filteredData, setFilteredData ] = useState(restaurantsData);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const filtered = favRestaurants.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase()),
+    );
+    setFilteredData(filtered);
+  };
 
   return (
     <Box>
@@ -20,39 +32,16 @@ export default function FavoritesScreen() {
         Favorites List
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">
-        <InputField placeholder="Search Favorites..."></InputField>
+        <InputField 
+          placeholder="Search Favorites..."
+          onChangeText={handleSearch}
+        />
       </Input>
       <FlatList
-        data={favRestaurants}
+        data={filteredData}
         keyExtractor={(item) => item.id} 
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/details/${item.id}`)}>
-            <Card size="md" variant="elevated" className="m-3">
-              <HStack space="md">
-                <Box className='flex-2 justify-center'>
-                  <Button onPress={() => router.push(`/(tabs)/(list)/edit/${item.id}`)}>
-                    <ButtonIcon as={EditIcon}></ButtonIcon>
-                  </Button>
-                </Box>
-                <Box className='flex-1'>
-                  <Heading size="md" className="mb-1 text-center">
-                    {item.title}
-                  </Heading>
-                  <Text size="sm" className='text-center'>{item.location}</Text>
-                </Box>
-                <Box className='flex-2 justify-center'>
-                  <Button onPress={() =>{item.favorite}}>
-                    <ButtonIcon 
-                      as={FavouriteIcon}
-                      color={item.favorite ? "red" : "white"}
-                    />
-                  </Button>
-                </Box>
-              </HStack>
-            </Card>
-          </TouchableOpacity>
-        )}>
-      </FlatList>
+        renderItem={({ item }) => <RestaurantCard {...item} />}
+      />
     </Box>
   );
 }

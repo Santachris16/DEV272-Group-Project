@@ -1,4 +1,5 @@
-import { TouchableOpacity } from 'react-native';
+import { Pressable, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from "react";
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 import restaurantsData from '../../../data/restaurantsList.json';
@@ -7,13 +8,23 @@ import { Heading } from '@/components/ui/heading';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { Fab, FabIcon } from '@/components/ui/fab';
-import { AddIcon, EditIcon, FavouriteIcon } from '@/components/ui/icon';
-import { Button, ButtonIcon } from '@/components/ui/button';
+import { AddIcon, EditIcon, FavouriteIcon, Icon } from '@/components/ui/icon';
 import { HStack } from '@/components/ui/hstack';
 import { Input, InputField } from '@/components/ui/input';
+import RestaurantCard from '@/components/RestaurantCard';
 
 export default function ListScreen() {
   const router = useRouter();
+  const [ searchQuery, setSearchQuery ] = useState('');
+  const [ filteredData, setFilteredData ] = useState(restaurantsData);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const filtered = restaurantsData.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase()),
+    );
+    setFilteredData(filtered);
+  };
 
   return (
     <Box>
@@ -21,39 +32,16 @@ export default function ListScreen() {
         Restaurant List
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">
-        <InputField placeholder="Search Restaurants..."></InputField>
+        <InputField 
+          placeholder="Search Restaurants..."
+          onChangeText={handleSearch}
+        />
       </Input>
       <FlatList
-        data={restaurantsData}
+        data={filteredData}
         keyExtractor={(item) => item.id} 
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/details/${item.id}`)}>
-            <Card size="md" variant="elevated" className="m-3">
-              <HStack space="md">
-                <Box className='flex-2 justify-center'>
-                  <Button onPress={() => router.push(`/(tabs)/(list)/edit/${item.id}`)}>
-                    <ButtonIcon as={EditIcon}></ButtonIcon>
-                  </Button>
-                </Box>
-                <Box className='flex-1'>
-                  <Heading size="md" className="mb-1 text-center">
-                    {item.title}
-                  </Heading>
-                  <Text size="sm" className='text-center'>{item.location}</Text>
-                </Box>
-                <Box className='flex-2 justify-center'>
-                  <Button onPress={() =>{item.favorite}}>
-                    <ButtonIcon 
-                      as={FavouriteIcon}
-                      color={item.favorite ? "red" : "white"}
-                    />
-                  </Button>
-                </Box>
-              </HStack>
-            </Card>
-          </TouchableOpacity>
-        )}>
-      </FlatList>
+        renderItem={({ item }) => <RestaurantCard {...item}/>}
+      />
       <Fab
         size='lg'
         className='bottom-32 dark:bg-zinc-700'
