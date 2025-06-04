@@ -1,13 +1,7 @@
 import { Box } from "@/components/ui/box";
-import { Button, ButtonIcon } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
-import { HStack } from "@/components/ui/hstack";
 import { Input, InputField } from "@/components/ui/input";
 import { FlatList, TouchableOpacity } from "react-native";
-import { Text } from '@/components/ui/text';
-import { EditIcon, FavouriteIcon } from "@/components/ui/icon";
-import { router } from "expo-router";
 import restaurantsData from '../../../data/restaurantsList.json';
 import { useState } from "react";
 import RestaurantCard from "@/components/RestaurantCard";
