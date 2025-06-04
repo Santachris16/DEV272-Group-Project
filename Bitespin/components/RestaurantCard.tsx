@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { Card } from "./ui/card";
 import { HStack } from "./ui/hstack";
 import { Box } from "./ui/box";
-import { Button, ButtonIcon } from "./ui/button";
 import { EditIcon, FavouriteIcon, Icon } from "./ui/icon";
 import { useRouter } from "expo-router";
 import { Heading } from "./ui/heading";
@@ -12,6 +11,10 @@ import { Pressable } from "./ui/pressable";
 
 export default function RestaurantCard(item: any) {
     const router = useRouter();
+
+    const handleFavoriteToggle = () => {
+        return
+    };
 
     return(
         <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/details/${item.id}`)}>
@@ -34,7 +37,7 @@ export default function RestaurantCard(item: any) {
                         <Text size="sm" className='text-center'>{item.location}</Text>
                     </Box>
                     <Box className='flex-2 justify-center'>
-                        <Pressable onPress={() =>{}}>
+                        <Pressable onPress={() => handleFavoriteToggle()}>
                             <Icon
                             as={FavouriteIcon}
                             size='xl'

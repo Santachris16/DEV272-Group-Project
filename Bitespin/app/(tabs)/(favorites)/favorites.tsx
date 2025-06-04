@@ -1,9 +1,9 @@
 import { Box } from "@/components/ui/box";
 import { Heading } from "@/components/ui/heading";
 import { Input, InputField } from "@/components/ui/input";
-import { FlatList, TouchableOpacity } from "react-native";
+import { FlatList } from "react-native";
 import restaurantsData from '../../../data/restaurantsList.json';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "@/components/RestaurantCard";
 
 
@@ -23,6 +23,18 @@ export default function FavoritesScreen() {
     );
     setFilteredData(filtered);
   };
+
+  useEffect(() => {
+    if (searchQuery ==='') {
+      setFilteredData(favoriteRestaurants);
+    } 
+    else {
+      const filtered = favoriteRestaurants.filter((item) => 
+        item.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+  }, [favoriteRestaurants])
 
   return (
     <Box>

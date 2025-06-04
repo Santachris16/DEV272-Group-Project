@@ -22,6 +22,18 @@ export default function ListScreen() {
     setFilteredData(filtered);
   };
 
+  useEffect(() => {
+    if (searchQuery ==='') {
+      setFilteredData(restaurantsData);
+    } 
+    else {
+      const filtered = restaurantsData.filter((item) => 
+        item.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+  }, [restaurantsData])
+
   return (
     <Box>
       <Heading size="3xl" className="self-center p-2">

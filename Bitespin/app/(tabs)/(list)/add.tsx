@@ -1,17 +1,34 @@
+import { Box } from '@/components/ui/box';
+import { Button, ButtonText } from '@/components/ui/button';
+import { Heading } from '@/components/ui/heading';
+import { Input, InputField } from '@/components/ui/input';
 import { router } from 'expo-router';
-import { View, Text, TextInput, Button } from 'react-native';
 
 export default function AddItemScreen() {
   return (
-    <View>
-      <Text>Add Restaurant</Text>
-      <TextInput placeholder="Title" />
-      <TextInput placeholder="Genre" />
-      <TextInput placeholder="Location" />
-      <TextInput placeholder="Rating" />
-      <TextInput placeholder="Visited (true/false)" />
-      <Button title="Confirm" onPress={() => alert('Added!')} />
-      <Button title="Return" onPress={() => router.push('/list')} />
-    </View>
+    <Box>
+      <Heading size="3xl" className="self-center p-2">Add Restaurant</Heading>
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder='Title'></InputField>
+      </Input>
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder='Genre'></InputField>
+      </Input>
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder='Location'></InputField>
+      </Input>
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder='Rating'></InputField>
+      </Input>
+      <Input variant="outline" size="lg" className="m-2 bg-white">
+        <InputField placeholder='Visited'></InputField>
+      </Input>
+      <Button action='positive' onPress={() => alert('Added!')}>
+        <ButtonText>Confirm</ButtonText>
+      </Button>
+      <Button action='negative' onPress={() => router.back()}>
+        <ButtonText>Cancel</ButtonText>
+      </Button>
+    </Box>
   );
 }
