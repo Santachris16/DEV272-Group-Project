@@ -12,15 +12,17 @@ import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Input, InputField } from '@/components/ui/input';
 import { Button, ButtonText } from '@/components/ui/button';
+import restaurantData from '../../../../data/restaurantsList.json'
 
 export default function EditItemScreen() {
   const { id } = useLocalSearchParams();
+  const restaurant = restaurantData.find((item) => item.id === id)
   const router = useRouter();
 
   return (
     <Box>
       <Heading size="3xl" className="self-center p-2">
-        Edit Restaurant #{id}
+        Edit "{restaurant?.title}"
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">
         <InputField placeholder='Autofilled Title'></InputField>

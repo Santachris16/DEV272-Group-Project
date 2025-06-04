@@ -14,8 +14,8 @@ export default function DetailsScreen() {
 
   return (
 
-    <Box className='flex-1 p-4'>
-      <Heading size="3xl" className="self-center">{restaurant?.title}</Heading>
+    <Box className='flex-1'>
+      <Heading size="3xl" className="self-center p-2">{restaurant?.title}</Heading>
       <Box className='flex-2 m-2 items-center justify-items-center'>
         <Image
         className='rounded-3xl'
@@ -26,7 +26,7 @@ export default function DetailsScreen() {
           alt="image"
         />
       </Box>
-      <Box className='flex-1'>
+      <Box className='flex-1 p-4'>
         <Text>Genre: {restaurant?.genre}</Text>
         <Text>Location: {restaurant?.location}</Text>
         <Text>Rating: {restaurant?.rating}</Text>
