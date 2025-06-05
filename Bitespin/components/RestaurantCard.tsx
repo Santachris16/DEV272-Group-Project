@@ -23,26 +23,33 @@ export default function RestaurantCard(item: any) {
                     <Box className='flex-2 justify-center'>
                         <Pressable onPress={() => router.push(`/(tabs)/(list)/edit/${item.id}`)}>
                             <Icon
-                            as={EditIcon}
-                            size='xl'
-                            color='black'
-                            className='ml-2'>
+                                as={EditIcon}
+                                size='xl'
+                                color='black'
+                                className='ml-2'>
                             </Icon>
                         </Pressable>
                     </Box>
                     <Box className='flex-1'>
-                        <Heading size="md" className="mb-1 text-center">
+                        <Heading size="lg" className="mb-1 text-center">
                             {item.title}
                         </Heading>
-                        <Text size="sm" className='text-center'>{item.location}</Text>
+                        <Box className="flex-1 flex-row">
+                            <Box className="flex-1">
+                                <Text size="md" className='text-center'>{item.genre}</Text>
+                            </Box>
+                            <Box className="flex-1">
+                                <Text size="md" className='text-center'>{item.rating}</Text>
+                            </Box>
+                        </Box>
                     </Box>
                     <Box className='flex-2 justify-center'>
                         <Pressable onPress={() => handleFavoriteToggle()}>
                             <Icon
-                            as={FavouriteIcon}
-                            size='xl'
-                            color={item.favorite ? "red" : "black"}
-                            className='mr-2'>
+                                as={FavouriteIcon}
+                                size='xl'
+                                color={item.favorite ? "red" : "black"}
+                                className='mr-2'>
                             </Icon>
                         </Pressable>
                     </Box>
