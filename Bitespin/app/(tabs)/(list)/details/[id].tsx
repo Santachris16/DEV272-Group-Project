@@ -5,7 +5,7 @@ import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { Image } from '@/components/ui/image';
 import { Fab, FabIcon } from '@/components/ui/fab';
-import { ArrowLeftIcon } from '@/components/ui/icon';
+import { ArrowLeftIcon, FavouriteIcon, Icon } from '@/components/ui/icon';
 
 
 export default function DetailsScreen() {
@@ -16,6 +16,14 @@ export default function DetailsScreen() {
 
     <Box className='flex-1'>
       <Heading size="3xl" className="self-center p-2">{restaurant?.title}</Heading>
+      {restaurant?.favorite ?
+        <Icon
+          as={FavouriteIcon}
+          size='xl'
+          color={"red"}
+          className='absolute inset-5'
+        />:null
+      }
       <Box className='flex-2 m-2 items-center justify-items-center'>
         <Image
         className='rounded-3xl'
@@ -31,7 +39,6 @@ export default function DetailsScreen() {
         <Text>Location: {restaurant?.location}</Text>
         <Text>Rating: {restaurant?.rating}</Text>
         <Text>Visited: {restaurant?.visited ? "Visited" : "Not yet visited"}</Text>
-        <Text>Favorited: {restaurant?.favorite ? "Favorited" : "Not Favorited"}</Text>
       </Box>
       <Fab
         size='lg'
