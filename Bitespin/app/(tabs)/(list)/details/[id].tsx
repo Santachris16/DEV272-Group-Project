@@ -31,6 +31,7 @@ export default function DetailsScreen() {
         <Text>Location: {restaurant?.location}</Text>
         <Text>Rating: {restaurant?.rating}</Text>
         <Text>Visited: {restaurant?.visited ? "Visited" : "Not yet visited"}</Text>
+        <Text>Favorited: {restaurant?.favorite ? "Favorited" : "Not Favorited"}</Text>
       </Box>
       <Fab
         size='lg'
