@@ -13,7 +13,7 @@ export default function RestaurantCard({ id, title, genre, rating, favorite }: a
     const router = useRouter();
 
     const handleFavoriteToggle = () => {
-        return;
+        return
     };
 
     return(
@@ -37,7 +37,7 @@ export default function RestaurantCard({ id, title, genre, rating, favorite }: a
                     </Box>
 
                     <Box className='pr-2'>
-                        <Pressable onPress={() => handleFavoriteToggle()}>
+                        <Pressable onPress={handleFavoriteToggle}>
                             <Icon as={FavouriteIcon} size='xl' color={favorite ? "red" : "black"} />
                         </Pressable>
                     </Box>
