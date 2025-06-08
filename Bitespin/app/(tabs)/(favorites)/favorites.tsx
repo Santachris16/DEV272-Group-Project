@@ -25,16 +25,16 @@ export default function FavoritesScreen() {
   };
 
   useEffect(() => {
-    if (searchQuery ==='') {
+    if (searchQuery === '') {
       setFilteredData(favoriteRestaurants);
     } 
     else {
       const filtered = favoriteRestaurants.filter((item) => 
-        item.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
-  }, [favoriteRestaurants])
+  }, [favoriteRestaurants]);
 
   return (
     <Box>

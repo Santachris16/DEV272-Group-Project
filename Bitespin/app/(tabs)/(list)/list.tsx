@@ -23,16 +23,16 @@ export default function ListScreen() {
   };
 
   useEffect(() => {
-    if (searchQuery ==='') {
+    if (searchQuery === '') {
       setFilteredData(restaurantsData);
     } 
     else {
       const filtered = restaurantsData.filter((item) => 
-        item.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
-  }, [restaurantsData])
+  }, [restaurantsData]);
 
   return (
     <Box>
