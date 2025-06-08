@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 import restaurantsData from '../../../data/restaurantsList.json';
@@ -11,28 +11,13 @@ import RestaurantCard from '@/components/RestaurantCard';
 
 export default function ListScreen() {
   const router = useRouter();
-  const [ searchQuery, setSearchQuery ] = useState('');
-  const [ filteredData, setFilteredData ] = useState(restaurantsData);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    const filtered = restaurantsData.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase()),
-    );
-    setFilteredData(filtered);
-  };
-
-  useEffect(() => {
-    if (searchQuery === '') {
-      setFilteredData(restaurantsData);
-    } 
-    else {
-      const filtered = restaurantsData.filter((item) => 
+  const filteredData = searchQuery === ''
+    ? restaurantsData
+    : restaurantsData.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredData(filtered);
-    }
-  }, [restaurantsData]);
 
   return (
     <Box>
@@ -40,15 +25,16 @@ export default function ListScreen() {
         Restaurant List
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">
-        <InputField 
+        <InputField
           placeholder="Search Restaurants..."
-          onChangeText={handleSearch}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
       </Input>
       <FlatList
         data={filteredData}
-        keyExtractor={(item) => item.id} 
-        renderItem={({ item }) => <RestaurantCard {...item}/>}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <RestaurantCard {...item} />}
       />
       <Fab
         size='lg'
