@@ -9,6 +9,7 @@ import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-con
 import { Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader } from '@/components/ui/modal';
 import { Icon, CloseIcon } from '@/components/ui/icon';
 import { Image } from '@/components/ui/image';
+import { Divider } from '@/components/ui/divider';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -102,29 +103,36 @@ export default function HomeScreen() {
         <ModalBackdrop/>
         <ModalContent>
           <ModalHeader>
-            <Heading>{displayData?.title}</Heading>
-            <ModalCloseButton>
+            <Heading className='mx-auto' size='xl'>{displayData?.title}</Heading>
+            {/* <ModalCloseButton>
               <Icon as={CloseIcon} className="stroke-background-500" />
-            </ModalCloseButton>
+            </ModalCloseButton> */}
           </ModalHeader>
           <ModalBody>
             <Image
-              className='rounded-xl'
-              size='xl'
+              className='rounded-xl m-4 mx-auto'
+              size='2xl'
               source={{
                 uri: displayData?.photo,
               }}
               alt="image"
             />
+            <Divider className='mb-2'></Divider>
             <Text>Genre: {displayData?.genre}</Text>
             <Text>Rating: {displayData?.rating}</Text>
             <Text>Location: {displayData?.location}</Text>
             <Text>Visited: {displayData?.visited ? "Yes" : "No"}</Text>
             <Text>{displayData?.favorite ? "Favorited" : null}</Text>
+            <Divider className='mt-2'></Divider>
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter className='justify-around'>
             <Button onPress={handleReroll}>
               <ButtonText>Reroll</ButtonText>
+            </Button>
+            <Button onPress={() => {
+                setShowModal(false)
+              }}>
+              <ButtonText>Close</ButtonText>
             </Button>
           </ModalFooter>
         </ModalContent>
