@@ -12,15 +12,16 @@ import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Input, InputField } from '@/components/ui/input';
 import { Button, ButtonText } from '@/components/ui/button';
-import restaurantData from '../../../../data/restaurantsList.json';
 import { Text } from '@/components/ui/text';
 import { Divider } from '@/components/ui/divider';
 import { Checkbox, CheckboxIcon, CheckboxIndicator, CheckboxLabel } from '@/components/ui/checkbox';
 import { CheckIcon } from '@/components/ui/icon';
+import { useRestaurantContext } from '@/components/ui/restaurant-context-provider';
 
 export default function EditItemScreen() {
   const { id } = useLocalSearchParams();
-  const restaurant = restaurantData.find((item) => item.id === id)
+  const { restaurants } = useRestaurantContext();
+  const restaurant = restaurants.find((item) => item.id === id)
   const router = useRouter();
 
   return (

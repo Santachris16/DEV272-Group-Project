@@ -3,12 +3,13 @@ import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import restaurantData from '../../../data/restaurantsList.json';
 import { useState } from 'react';
+import { useRestaurantContext } from '@/components/ui/restaurant-context-provider';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const [ filteredData, setFilteredData ] = useState(restaurantData);
+  const { restaurants } = useRestaurantContext();
+  const [ filteredData, setFilteredData ] = useState(restaurants);
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -19,12 +20,12 @@ export default function HomeScreen() {
   };
 
   const selectRandomRestaurant = () => {
-    const randomRestaurant = getRandomNumber(restaurantData.length)
+    const randomRestaurant = getRandomNumber(restaurants.length)
     router.push(`/(tabs)/(list)/details/${randomRestaurant}`)
   };
 
   const selectRandomFavorite = () => {
-    const filtered = restaurantData.filter((item) => item.favorite === true)
+    const filtered = restaurants.filter((item) => item.favorite === true)
     setFilteredData(filtered)
     const randomIndex = getRandomNumber(filteredData.length)
     const randomFavorite = filteredData[randomIndex].id
@@ -32,7 +33,7 @@ export default function HomeScreen() {
   };
 
   const selectRandomVisited = () => {
-    const filtered = restaurantData.filter((item) => item.visited === true)
+    const filtered = restaurants.filter((item) => item.visited === true)
     setFilteredData(filtered)
     const randomIndex = getRandomNumber(filteredData.length)
     const randomVisited = filteredData[randomIndex].id
@@ -40,7 +41,7 @@ export default function HomeScreen() {
   };
 
   const selectRandomUnvisited = () => {
-    const filtered = restaurantData.filter((item) => item.visited === false)
+    const filtered = restaurants.filter((item) => item.visited === false)
     setFilteredData(filtered)
     const randomIndex = getRandomNumber(filteredData.length)
     const randomUnvisited = filteredData[randomIndex].id

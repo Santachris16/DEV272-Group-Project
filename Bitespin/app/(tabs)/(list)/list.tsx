@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
-import restaurantsData from '../../../data/restaurantsList.json';
 import { Heading } from '@/components/ui/heading';
 import { Box } from '@/components/ui/box';
 import { Fab, FabIcon } from '@/components/ui/fab';
 import { AddIcon } from '@/components/ui/icon';
 import { Input, InputField } from '@/components/ui/input';
 import RestaurantCard from '@/components/RestaurantCard';
+import { useRestaurantContext } from "@/components/ui/restaurant-context-provider";
 
 export default function ListScreen() {
   const router = useRouter();
+  const { restaurants } = useRestaurantContext();
   const [ searchQuery, setSearchQuery ] = useState('');
-  const [ filteredData, setFilteredData ] = useState(restaurantsData);
+  const [ filteredData, setFilteredData ] = useState(restaurants);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const filtered = restaurantsData.filter((item) =>
+    const filtered = restaurants.filter((item) =>
       item.title.toLowerCase().includes(query.toLowerCase()),
     );
     setFilteredData(filtered);
@@ -24,15 +25,15 @@ export default function ListScreen() {
 
   useEffect(() => {
     if (searchQuery ==='') {
-      setFilteredData(restaurantsData);
+      setFilteredData(restaurants);
     } 
     else {
-      const filtered = restaurantsData.filter((item) => 
+      const filtered = restaurants.filter((item) => 
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
-  }, [restaurantsData])
+  }, [restaurants])
 
   return (
     <Box>
