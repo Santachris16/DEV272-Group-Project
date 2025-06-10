@@ -6,18 +6,18 @@ import { Button, ButtonText } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { useState } from 'react';
 import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-context-provider';
-import { Modal, ModalBackdrop, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader } from '@/components/ui/modal';
-import { Icon, CloseIcon } from '@/components/ui/icon';
+import { Modal, ModalBackdrop, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/components/ui/modal';
 import { Image } from '@/components/ui/image';
 import { Divider } from '@/components/ui/divider';
 
 export default function HomeScreen() {
   const router = useRouter();
   const { restaurants } = useRestaurantContext();
-  const [ filteredData, setFilteredData ] = useState(restaurants);
   const [ showModal, setShowModal ] = useState(false);
   const [ displayData, setDisplayData ] = useState<Restaurant>();
   const [ selectionFunction, setSelectionFunction ] = useState("");
+
+  // Gets a random number and takes a max value as a parameter
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -27,51 +27,43 @@ export default function HomeScreen() {
     return Math.floor(Math.random() * maxValue);
   };
 
-  const selectRandomRestaurant = () => {
-    setSelectionFunction("All")
-    const data = restaurants
-    const randomIndex = getRandomNumber(data.length)
-    const randomRestaurant = restaurants[randomIndex]
-    // router.push(`/(tabs)/(list)/details/${randomRestaurant}`)
-    setDisplayData(randomRestaurant)
-    setShowModal(true)
-  };
+  // Takes a list of restaurants and a string representing the Random function to use
 
-  const selectRandomFavorite = () => {
-    setSelectionFunction("Favorites")
-    const filtered = restaurants.filter((item) => item.favorite === true)
-    setFilteredData(filtered)
-    const randomIndex = getRandomNumber(filteredData.length)
-    const randomFavorite = filteredData[randomIndex]
-    // router.push(`/(tabs)/(list)/details/${randomFavorite}`)
-    setDisplayData(randomFavorite)
-    setShowModal(true)
-  };
+  const handleSelection = (data: Restaurant[], selectionType: string) => {
+    setSelectionFunction(selectionType);
+    if (data.length > 0) {
+        const randomIndex = getRandomNumber(data.length);
+        const randomItem = data[randomIndex];
 
-  const selectRandomVisited = () => {
-    setSelectionFunction("Visited")
-    const filtered = restaurants.filter((item) => item.visited === true)
-    setFilteredData(filtered)
-    const randomIndex = getRandomNumber(filteredData.length)
-    const randomVisited = filteredData[randomIndex]
-    // router.push(`/(tabs)/(list)/details/${randomVisited}`)
-    setDisplayData(randomVisited)
-    setShowModal(true)
-  };
+        // Rerolls if the result is the same as the currently displayed data
 
-  const selectRandomUnvisited = () => {
-    setSelectionFunction("Unvisited")
-    const filtered = restaurants.filter((item) => item.visited === false)
-    setFilteredData(filtered)
-    const randomIndex = getRandomNumber(filteredData.length)
-    const randomUnvisited = filteredData[randomIndex]
-    // router.push(`/(tabs)/(list)/details/${randomUnvisited}`)
-    setDisplayData(randomUnvisited)
-    setShowModal(true)
+        if (randomItem === displayData) {
+          handleSelection(data, selectionType)
+          return;
+        }
+        setDisplayData(randomItem);
+        setShowModal(true);
+    } else {
+        console.log(`No restaurants found for selection: ${selectionType}`);
+        alert(`No "${selectionType}" restaurants found to choose from!`);
+    }
   };
+  
+  // Selection functions
+
+  const selectRandomRestaurant = () => 
+    handleSelection(restaurants, "All");
+
+  const selectRandomFavorite = () => 
+    handleSelection(restaurants.filter(item => item.favorite), "Favorites");
+
+  const selectRandomVisited = () => 
+    handleSelection(restaurants.filter(item => item.visited), "Visited");
+
+  const selectRandomUnvisited = () => 
+    handleSelection(restaurants.filter(item => !item.visited), "Unvisited");
 
   function handleReroll() {
-    
     switch (selectionFunction) {
       case "All":
         selectRandomRestaurant()
@@ -104,9 +96,6 @@ export default function HomeScreen() {
         <ModalContent>
           <ModalHeader>
             <Heading className='mx-auto' size='xl'>{displayData?.title}</Heading>
-            {/* <ModalCloseButton>
-              <Icon as={CloseIcon} className="stroke-background-500" />
-            </ModalCloseButton> */}
           </ModalHeader>
           <ModalBody>
             <Image
