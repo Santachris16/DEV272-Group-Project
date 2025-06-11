@@ -1,4 +1,4 @@
-# ✅ Week 08 – Sprint Closeout
+#  Week 08 – Sprint Closeout
 
 **Team:** Proof of Concept  
 **Project:** Bitespin – Random Restaurant Recommendation App  
@@ -6,7 +6,7 @@
 
 ---
 
-## ✅ Completed Tasks
+##  Completed Tasks
 
 | Task Name                               | Creator           | Assignee         |
 |-----------------------------------------|--------------------|------------------|
@@ -17,7 +17,7 @@
 
 ---
 
-## ⏳ Unfinished Tasks (With Notes)
+##  Unfinished Tasks (With Notes)
 
 | Task Name                        | Creator        | Assignee       | Notes                                                              |
 |----------------------------------|----------------|----------------|--------------------------------------------------------------------|
@@ -28,7 +28,7 @@
 | UI/UX layout adjustments for consistency| Team           | Team        |
 ---
 
-## ❌ Failed to Do
+##  Failed to Do
 
 | Task Name                         | Creator     | Assignee  | 
 |----------------------------------|-------------|-----------|
@@ -38,7 +38,7 @@
 
 ---
 
-## 🐞 Bugs or Blockers
+##  Bugs or Blockers
 
 | Bug Name                                  | Creator        | Assignee       | Notes                                                             |
 |-------------------------------------------|----------------|----------------|-------------------------------------------------------------------|
