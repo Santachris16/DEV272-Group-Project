@@ -4,7 +4,7 @@
     "title": "The Golden Spoon",
     "genre": "Italian",
     "location": "123 Main St, Anytown, USA",
-    "photo": "https://example.com/photos/golden_spoon.jpg",
+    "photo": "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.5,
     "visited": true,
     "favorite": true
@@ -14,7 +14,7 @@
     "title": "Spice Route",
     "genre": "Indian",
     "location": "456 Oak Ave, Anytown, USA",
-    "photo": "https://example.com/photos/spice_route.jpg",
+    "photo": "https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.8,
     "visited": false,
     "favorite": false
@@ -24,7 +24,7 @@
     "title": "Sushi Heaven",
     "genre": "Japanese",
     "location": "789 Pine Ln, Anytown, USA",
-    "photo": "https://example.com/photos/sushi_heaven.jpg",
+    "photo": "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.2,
     "visited": true,
     "favorite": true
@@ -34,7 +34,7 @@
     "title": "Burger Barn",
     "genre": "American",
     "location": "101 Maple Dr, Anytown, USA",
-    "photo": "https://example.com/photos/burger_barn.jpg",
+    "photo": "https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 3.9,
     "visited": false,
     "favorite": false
@@ -44,7 +44,7 @@
     "title": "Taco Fiesta",
     "genre": "Mexican",
     "location": "202 Birch Rd, Anytown, USA",
-    "photo": "https://example.com/photos/taco_fiesta.jpg",
+    "photo": "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.6,
     "visited": true,
     "favorite": true
@@ -54,7 +54,7 @@
     "title": "Le Croissant Dore",
     "genre": "French",
     "location": "303 Cedar Blvd, Anytown, USA",
-    "photo": "https://example.com/photos/le_croissant.jpg",
+    "photo": "https://images.pexels.com/photos/106936/pexels-photo-106936.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.9,
     "visited": true,
     "favorite": true
@@ -64,7 +64,7 @@
     "title": "Pho King",
     "genre": "Vietnamese",
     "location": "404 Willow Way, Anytown, USA",
-    "photo": "https://example.com/photos/pho_king.jpg",
+    "photo": "https://images.pexels.com/photos/8949033/pexels-photo-8949033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.3,
     "visited": false,
     "favorite": false
@@ -74,8 +74,8 @@
     "title": "Mediterranean Grill",
     "genre": "Greek",
     "location": "505 Spruce St, Anytown, USA",
-    "photo": "https://example.com/photos/med_grill.jpg",
-    "rating": 4.0,
+    "photo": "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "rating": 4,
     "visited": true,
     "favorite": false
   },
@@ -84,7 +84,7 @@
     "title": "The Veggie Patch",
     "genre": "Vegetarian",
     "location": "606 Elm Pl, Anytown, USA",
-    "photo": "https://example.com/photos/veggie_patch.jpg",
+    "photo": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.7,
     "visited": false,
     "favorite": true
@@ -94,7 +94,7 @@
     "title": "BBQ Pit Stop",
     "genre": "Barbecue",
     "location": "707 Aspen Ct, Anytown, USA",
-    "photo": "https://example.com/photos/bbq_pit.jpg",
+    "photo": "https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "rating": 4.4,
     "visited": true,
     "favorite": false
