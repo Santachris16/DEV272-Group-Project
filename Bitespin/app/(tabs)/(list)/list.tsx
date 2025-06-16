@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 import { Heading } from '@/components/ui/heading';
@@ -12,28 +12,21 @@ import { useRestaurantContext } from "@/components/ui/restaurant-context-provide
 export default function ListScreen() {
   const router = useRouter();
   const { restaurants } = useRestaurantContext();
-  const [ searchQuery, setSearchQuery ] = useState('');
-  const [ filteredData, setFilteredData ] = useState(restaurants);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredData = useMemo(() => {
+    if (!searchQuery) {
+      return restaurants;
+    }
+    return restaurants.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [restaurants, searchQuery]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const filtered = restaurants.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase()),
-    );
-    setFilteredData(filtered);
   };
 
-  useEffect(() => {
-    if (searchQuery ==='') {
-      setFilteredData(restaurants);
-    } 
-    else {
-      const filtered = restaurants.filter((item) => 
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredData(filtered);
-    }
-  }, [restaurants])
 
   return (
     <Box>
@@ -49,7 +42,7 @@ export default function ListScreen() {
       </Input>
       <FlatList
         data={filteredData}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => <RestaurantCard {...item} />}
       />
       <Fab
