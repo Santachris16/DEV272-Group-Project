@@ -17,7 +17,7 @@ const ResturantSchema = Yup.object().shape({
   genre: Yup.string().required('Genre is required'),
   location: Yup.string().required('Address is required'),
   photo: Yup.string(),
-  rating: Yup.number().min(0).max(5),
+  rating: Yup.number().min(0, 'Must be between 0 - 5').max(5, 'Must be between 0 - 5'),
   visited: Yup.boolean(),
   favorite: Yup.boolean(),
 });
@@ -138,6 +138,11 @@ export default function AddItemScreen() {
                 value={values.rating.toString()}
               />
             </Input>
+            {touched.rating && errors.rating && (
+              <Text size="sm" className="text-red-500 ml-2">
+                {errors.rating}
+              </Text>
+            )}
             {/* Visited Input */}
             <Checkbox 
               size='lg'

@@ -41,6 +41,9 @@ export default function HomeScreen() {
           handleSelection(data, selectionType)
           return;
         }
+
+        // Sets the restaurant to be displayed and enables the modal to display it
+        
         setDisplayData(randomItem);
         setShowModal(true);
     } else {
