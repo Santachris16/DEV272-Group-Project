@@ -77,7 +77,7 @@ export default function HomeScreen() {
         handleSelection(data, selectionType);
         return;
       }
-
+      setDisplayData(randomItem);
       console.log("Selected restaurant:", randomItem); 
       setShowModal(true);
       console.log("Modal open:", true); 
