@@ -23,7 +23,7 @@ const UserContext = createContext<UserContextType>({
 // ============ Create context provider =============
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {  // Use other React components or elements nested inside it (its 'children') as a prop
   const {
-    data: sessionData,
+    data: sessionData,                          // Take the property data from the returned object and store it in a local variable called 'sessionData'
     isPending,
     error,
   } = useQuery({
