@@ -7,20 +7,17 @@ import { Modal, ModalBackdrop, ModalBody, ModalContent, ModalFooter, ModalHeader
 import { Text } from '@/components/ui/text';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../../../data/supabase';
+import { supabase } from '../../../data/supabase'; // adjust if needed
 
 export interface Restaurant {
-  names: string;
-  ratings: string;
-  cuisine: string;
-  price_for_one: number;
-  photo?: string;
-  location?: string;
-  genre?: string;
-  title?: string;
-  rating?: string;
-  visited?: boolean;
-  favorite?: boolean;
+  id: number;
+  title: string;
+  genre: string;
+  location: string;
+  photo: string;
+  rating: number;
+  visited: boolean;
+  favorite: boolean;
 }
 
 export default function HomeScreen() {
@@ -37,23 +34,12 @@ export default function HomeScreen() {
         .select('*');
 
       if (error) {
-        console.error('Supabase fetch error:', error.message);
+        console.error('❌ Supabase fetch error:', error.message);
         return;
       }
 
-      const mappedData = (data || []).map((item: Restaurant) => ({
-        ...item,
-        title: item.names,
-        rating: item.ratings,
-        genre: item.cuisine,
-        photo: item.photo || 'https://via.placeholder.com/300',
-        location: item.location || 'Unknown',
-        visited: item.visited ?? false,
-        favorite: item.favorite ?? false,
-      }));
-
-      console.log("Fetched restaurants:", mappedData); 
-      setRestaurants(mappedData);
+      console.log("✅ Supabase data received:", data);
+      setRestaurants(data || []);
     };
 
     fetchRestaurants();
@@ -61,34 +47,40 @@ export default function HomeScreen() {
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
-      console.log("MaxValue must be greater than 0");
+      console.log("⚠️ MaxValue must be greater than 0");
       return 0;
     }
     return Math.floor(Math.random() * maxValue);
   }
 
   const handleSelection = (data: Restaurant[], selectionType: string) => {
+    console.log(`🎯 Selection type: ${selectionType}`);
+    console.log("📋 Candidate list:", data);
+
     setSelectionFunction(selectionType);
+
     if (data.length > 0) {
       const randomIndex = getRandomNumber(data.length);
       const randomItem = data[randomIndex];
 
       if (randomItem === displayData) {
-        handleSelection(data, selectionType);
+        handleSelection(data, selectionType); // reroll if same
         return;
       }
 
-      console.log("Selected restaurant:", randomItem); 
+      console.log("✅ Selected restaurant:", randomItem);
+      setDisplayData(randomItem);
       setShowModal(true);
-      console.log("Modal open:", true); 
     } else {
-      console.log(`No restaurants found for selection: ${selectionType}`);
+      console.warn(`⚠️ No restaurants found for selection: ${selectionType}`);
       alert(`No "${selectionType}" restaurants found to choose from!`);
     }
   };
 
-  const selectRandomRestaurant = () =>
+  const selectRandomRestaurant = () => {
+    console.log("🍽️ All restaurants:", restaurants);
     handleSelection(restaurants, "All");
+  };
 
   const selectRandomFavorite = () =>
     handleSelection(restaurants.filter(item => item.favorite), "Favorites");
@@ -99,7 +91,7 @@ export default function HomeScreen() {
   const selectRandomUnvisited = () =>
     handleSelection(restaurants.filter(item => !item.visited), "Unvisited");
 
-  function handleReroll() {
+  const handleReroll = () => {
     switch (selectionFunction) {
       case "All":
         selectRandomRestaurant();
@@ -114,9 +106,9 @@ export default function HomeScreen() {
         selectRandomUnvisited();
         break;
       default:
-        return null;
+        break;
     }
-  }
+  };
 
   return (
     <Box className="flex-1">
@@ -125,14 +117,14 @@ export default function HomeScreen() {
         <ModalContent>
           <ModalHeader>
             <Heading className="mx-auto" size="xl">
-              {displayData?.title ?? "No title available"} {/*  Fallback */}
+              {displayData?.title ?? "No title available"}
             </Heading>
           </ModalHeader>
           <ModalBody>
             <Image
               className="rounded-xl m-4 mx-auto"
               size="2xl"
-              source={{ uri: displayData?.photo ?? 'https://via.placeholder.com/300' }} 
+              source={{ uri: displayData?.photo ?? 'https://via.placeholder.com/300' }}
               alt="image"
             />
             <Divider className="mb-2" />
