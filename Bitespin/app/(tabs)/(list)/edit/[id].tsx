@@ -42,7 +42,8 @@ export default function EditItemScreen() {
       }}
         validationSchema={ResturantSchema}
         onSubmit={(values, { resetForm }) => {
-          updateRestaurant(id, {
+          updateRestaurant({
+            ...restaurant,
             title: values.title,
             genre: values.genre,
             location: values.location,
