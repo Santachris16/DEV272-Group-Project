@@ -52,19 +52,25 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     const toggleFavorite = (id: string) => {
-        setRestaurants((prev) =>
-            prev.map((restaurant) =>
-                restaurant.id === id ? { ...restaurant, favorite: !restaurant.favorite } : restaurant
-            )
+        const restaurantToToggle = restaurants.find(
+            (restaurant) => restaurant.id === id,
         );
+        if (!restaurantToToggle) return;
+        updateRestaurant({
+            ...restaurantToToggle,
+            favorite: !restaurantToToggle.favorite,
+        })
     };
     
     const toggleVisited = (id: string) => {
-        setRestaurants((prev) =>
-            prev.map((restaurant) =>
-                restaurant.id === id ? { ...restaurant, visited: !restaurant.visited } : restaurant
-            )
+        const restaurantToToggle = restaurants.find(
+            (restaurant) => restaurant.id === id,
         );
+        if (!restaurantToToggle) return;
+        updateRestaurant({
+            ...restaurantToToggle,
+            visited: !restaurantToToggle.visited,
+        })
     };
 
     useEffect(() => {
@@ -76,7 +82,11 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
     return (
         <RestaurantContext.Provider
             value={{
-                isLoading: isFetching,
+                isLoading: 
+                    isFetching ||
+                    addRestaurantMutation.isPending ||
+                    deleteRestaurantMutation.isPending ||
+                    updateRestaurantMutation.isPending,
                 restaurants,
                 addRestaurant,
                 updateRestaurant,
