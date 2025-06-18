@@ -21,11 +21,27 @@ export default function TabLayout() {
   // ====== Logic to redirect user based on login status ========
   //
   // If not logged in and trying to access a protected tab, redirect to login
+  // const isOnLoginTab = pathname === '/login';
+  // const isTryingToAccessProtectedTab = !user && !isOnLoginTab;
+  // if (isTryingToAccessProtectedTab) {
+  //   return <Redirect href="/login" />;
+  // }
+
+  // Prevent routing until auth state is ready
+  if (isPending) return null;
+
   const isOnLoginTab = pathname === '/login';
-  const isTryingToAccessProtectedTab = !user && !isOnLoginTab;
-  if (isTryingToAccessProtectedTab) {
+
+  // If not logged in and trying to access protected tabs
+  if (!user && !isOnLoginTab) {
     return <Redirect href="/login" />;
   }
+
+  // If logged in and somehow landed on login page (or enter in /login in url)
+  if (user && isOnLoginTab) {
+    return <Redirect href="/" />;
+  }
+
 
   // Logged in -> render protected tabs
   return (
@@ -69,6 +85,8 @@ export default function TabLayout() {
         options={{
           title: 'Login',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="chevron.right" color={color} />,
+          href: user ? null : '/login',
+          tabBarStyle: user ? { display: 'none' } : undefined,
         }}
       />
     </Tabs>
