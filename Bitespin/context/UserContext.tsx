@@ -1,52 +1,65 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../data/supabase';
-import { useQuery} from '@tanstack/react-query';
-
-// note: no need to create query client, it's already created in the root _layout
 
 // ================= Create context ==================
 
-//this is the data type for the user context
 type UserContextType = {
   user: any;
   isPending: boolean;
   error: any;
 };
 
-// Create context with some default values
 const UserContext = createContext<UserContextType>({
   user: null,
   isPending: false,
   error: null,
 });
 
-// ============ Create context provider =============
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {  // Use other React components or elements nested inside it (its 'children') as a prop
-  const {
-    data: sessionData,
-    isPending,
-    error,
-  } = useQuery({
-    queryKey: ['userSession'],                  // can name anything, must be unique, this will show up in the devtools
-    queryFn: async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (error) throw error;
-      return data.session?.user ?? null;        // Inside session property, there's user property which contains the user data
-    },
-    refetchOnWindowFocus: false,                // Don't refetch when the window is focused
-  });
+// ============ Context Provider =============
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  // local state for user, loading, and error
+  const [user, setUser] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // fetch session once on mount
+    supabase.auth.getSession()
+      .then(({ data, error }) => {
+        if (error) {
+          setError(error);
+        } else {
+          setUser(data.session?.user ?? null);
+        }
+        setIsPending(false);
+      });
+
+    // Listen to auth state changes and update user | note: destructuring the data property from the object returned by onAuthStateChange, and saving it as listener
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    // unsubscribe when component unmounts
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
-    <UserContext.Provider
-      value={{ user: sessionData, isPending, error }}
-    >
+    <UserContext.Provider value={{ user, isPending, error }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-// Export hook to use the UserContext, skipping having to use useContext(UserContext) every time
 export const useUser = () => useContext(UserContext);
 
 
-// Wrapping the UserProvider around the app in _layout.tsx so that the user data is available throughout the app
+// note on change:
+// useQuery only fetch the login state once on mount
+// and does not update on auth state changes, so we need a custom context that listens to auth state changes via supabase.auth.onAuthStateChange
+
+// ============ IMPORTANT NOTE =============
+// BIG note on useEffect (thank you React class for ts!):
+//useEffect runs the first function after the component renders and whenever dependencies change (the array in the second argument). 
+// Inside that function, the optional return defines a cleanup function that runs before the next effect runs or when the component unmounts.
