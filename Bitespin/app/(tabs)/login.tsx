@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React = require('react');
 import { Button, Text, TextInput, View } from 'react-native';
+import { router } from 'expo-router';
 import { supabase } from '../../data/supabase';
 
 
@@ -21,6 +22,9 @@ export default function AuthScreen() {
       setMessage(error.message);
     } else {
       setMessage('Login successful!');
+      
+      // Redirect to default (Home) tab
+      router.replace('/');
     }
   };
 

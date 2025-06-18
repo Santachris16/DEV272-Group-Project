@@ -1,16 +1,17 @@
+import React from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
-import restaurantData from '../../../../data/restaurantsList.json'
 import { Heading } from '@/components/ui/heading';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { Image } from '@/components/ui/image';
 import { Fab, FabIcon } from '@/components/ui/fab';
 import { ArrowLeftIcon, FavouriteIcon, Icon } from '@/components/ui/icon';
-
+import { useRestaurantContext } from '@/components/ui/restaurant-context-provider';
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
-  const restaurant = restaurantData.find((item) => item.id === id)
+  const { restaurants } = useRestaurantContext();
+  const restaurant = restaurants.find((item) => item.id === id)
 
   return (
 

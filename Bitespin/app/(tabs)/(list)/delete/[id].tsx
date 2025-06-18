@@ -1,18 +1,39 @@
+import React from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Button, ButtonText } from '@/components/ui/button';
-import restaurantData from '../../../../data/restaurantsList.json'
+import { useRestaurantContext } from '@/components/ui/restaurant-context-provider';
+import { Alert } from 'react-native';
+
 
 export default function DeleteItemScreen() {
   const { id } = useLocalSearchParams();
-  const restaurant = restaurantData.find((item) => item.id === id)
+  const { restaurants, deleteRestaurant } = useRestaurantContext();
+  const restaurant = restaurants.find((item) => item.id === id)
   const router = useRouter();
+
+    const handleDelete = () => {
+        if (typeof id !== 'string') return;
+
+        deleteRestaurant(id);
+
+        Alert.alert(
+            "Deleted!",
+            `${restaurant?.title} has been removed.`,
+            [
+                {
+                    text: 'OK',
+                    onPress: () => router.navigate('/(tabs)/(list)/list'),
+                },
+            ]
+        );
+    };
 
   return (
     <Box>
       <Heading size="3xl" className="self-center p-2">Delete {restaurant?.title}?</Heading>
-      <Button action='positive' onPress={() => alert('Deleted!')}>
+      <Button action='positive' onPress={handleDelete}>
         <ButtonText>Yes</ButtonText>
       </Button>
       <Button action='negative' onPress={() => router.back()}>
