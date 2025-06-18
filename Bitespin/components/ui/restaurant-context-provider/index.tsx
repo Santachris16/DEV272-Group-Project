@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
-import restaurantData from '@/data/restaurantsList.json'
+import React, { createContext, useContext, useEffect, useState } from "react";
+// import restaurantData from '@/data/restaurantsList.json'
+import { useGetRestaurants } from "@/hooks/useGetRestaurants";
+import { SupabaseNewRestaurant, useAddRestaurant } from "@/hooks/useAddRestaurant";
 
 export type Restaurant = {
     id: string;
@@ -13,8 +15,9 @@ export type Restaurant = {
 };
 
 type RestaurantContextType = {
+    isLoading: boolean;
     restaurants: Restaurant[];
-    addRestaurant: (restaurant: Restaurant) => void;
+    addRestaurant: (restaurant: SupabaseNewRestaurant) => void;
     updateRestaurant: (id: string, updatedRestaurant: Partial<Restaurant>) => void;
     deleteRestaurant: (id: string) => void;
     toggleVisited: (id: string) => void;
@@ -28,10 +31,13 @@ const RestaurantContext = createContext<RestaurantContextType | undefined>(
 export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [ restaurants, setRestaurants] = useState<Restaurant[]>(restaurantData as Restaurant[]);
+    const { data, isFetching } = useGetRestaurants();
+    // const [ restaurants, setRestaurants] = useState<Restaurant[]>(restaurantData as Restaurant[]);
+    const [ restaurants, setRestaurants] = useState<Restaurant[]>([]);
+    const addRestaurantMutation = useAddRestaurant();
 
-    const addRestaurant = (restaurant: Restaurant) => {
-        setRestaurants((prev) => [...prev, restaurant]);
+    const addRestaurant = (restaurant: SupabaseNewRestaurant) => {
+        addRestaurantMutation.mutate(restaurant);
     };
 
     const updateRestaurant = (id: string, updatedRestaurant: Partial<Restaurant>) => {
@@ -64,9 +70,16 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
         );
     };
 
+    useEffect(() => {
+        if (data && !isFetching) {
+            setRestaurants(data as Restaurant[])
+        }
+    }, [data, isFetching]);
+
     return (
         <RestaurantContext.Provider
             value={{
+                isLoading: isFetching,
                 restaurants,
                 addRestaurant,
                 updateRestaurant,

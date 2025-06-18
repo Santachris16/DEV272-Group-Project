@@ -43,7 +43,6 @@ export default function AddItemScreen() {
         validationSchema={ResturantSchema}
         onSubmit={(values, { resetForm }) => {
           addRestaurant({
-            id: Date.now().toString(),
             title: values.title,
             genre: values.genre,
             location: values.location,
