@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 // import restaurantData from '@/data/restaurantsList.json'
 import { useGetRestaurants } from "@/hooks/useGetRestaurants";
 import { SupabaseNewRestaurant, useAddRestaurant } from "@/hooks/useAddRestaurant";
+import { useDeleteRestaurant } from "@/hooks/useDeleteRestaurant";
 
 export type Restaurant = {
     id: string;
@@ -32,9 +33,10 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
     const { data, isFetching } = useGetRestaurants();
-    // const [ restaurants, setRestaurants] = useState<Restaurant[]>(restaurantData as Restaurant[]);
     const [ restaurants, setRestaurants] = useState<Restaurant[]>([]);
     const addRestaurantMutation = useAddRestaurant();
+    const deleteRestaurantMutation = useDeleteRestaurant();
+    // const updateRestaurantMutation = useUpdateRestaurant();
 
     const addRestaurant = (restaurant: SupabaseNewRestaurant) => {
         addRestaurantMutation.mutate(restaurant);
@@ -48,10 +50,8 @@ export const RestaurantProvider: React.FC<{ children: React.ReactNode }> = ({
         );
     };
 
-    const deleteRestaurant = (id: string) => {
-        setRestaurants((prev) =>
-            prev.filter((restaurant) => restaurant.id !== id)
-        );
+    const deleteRestaurant = async (restaurantId: Restaurant["id"]) => {
+        deleteRestaurantMutation.mutate(restaurantId)
     };
 
     const toggleFavorite = (id: string) => {
