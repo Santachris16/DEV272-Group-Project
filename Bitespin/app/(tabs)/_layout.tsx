@@ -7,7 +7,8 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-import { useUser } from '@/context/UserContext';    // Import user context to check if user is logged in
+import { useUser } from '@/context/UserContext';      // Import user context to check if user is logged in
+import LogoutButton from '@/components/LogoutButton'; // Import logout button component
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -58,6 +59,7 @@ export default function TabLayout() {
           },
           default: {},
         }),
+        headerRight: () => (user ? <LogoutButton /> : null),
       }}>
       <Tabs.Screen
         name="(home)"
