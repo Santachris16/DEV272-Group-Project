@@ -21,7 +21,8 @@ export const useUpdateRestaurant = () => {
       }
       return data as Restaurant;
     },
-    
+    // Optimistic update; updates the query cache with the updated data instead of
+    // Performing an additional refetch. Should hopefully speed things up.
     onSuccess: (updatedRestaurant: Restaurant) => {
       queryClient.setQueryData(
         ['Restaurant'],
