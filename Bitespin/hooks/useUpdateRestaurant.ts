@@ -7,17 +7,35 @@ export const useUpdateRestaurant = () => {
 
   return useMutation({
     mutationFn: async (updatedRestaurant: Partial<Restaurant>) => {
+      if (!updatedRestaurant.id) {
+        throw new Error("Restaurant ID is required for an update.");
+      }
       const { data, error } = await supabase
         .from("Restaurant")
         .update(updatedRestaurant)
-        .eq("id", updatedRestaurant.id);
+        .eq("id", updatedRestaurant.id)
+        .select()
+        .single();
       if (error) {
         throw new Error(error.message);
       }
-      return data;
+      return data as Restaurant;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["Restaurant"] });
+    
+    onSuccess: (updatedRestaurant: Restaurant) => {
+      queryClient.setQueryData(
+        ['Restaurant'],
+        (oldData: Restaurant[] | undefined) => {
+          if (!oldData) {
+            return undefined;
+          }
+          return oldData.map((restaurant: Restaurant) =>
+            restaurant.id === updatedRestaurant.id
+              ? updatedRestaurant
+              : restaurant
+          );
+        }
+      );
     },
   });
 };

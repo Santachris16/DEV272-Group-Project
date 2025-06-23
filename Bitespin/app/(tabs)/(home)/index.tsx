@@ -5,45 +5,45 @@ import { Heading } from '@/components/ui/heading';
 import { Image } from '@/components/ui/image';
 import { Modal, ModalBackdrop, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/components/ui/modal';
 import { Text } from '@/components/ui/text';
-import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../../../data/supabase'; // adjust if needed
+import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-context-provider';
+// import { supabase } from '../../../data/supabase'; // adjust if needed
 
-export interface Restaurant {
-  id: number;
-  title: string;
-  genre: string;
-  location: string;
-  photo: string;
-  rating: number;
-  visited: boolean;
-  favorite: boolean;
-}
+// export interface Restaurant {
+//   id: number;
+//   title: string;
+//   genre: string;
+//   location: string;
+//   photo: string;
+//   rating: number;
+//   visited: boolean;
+//   favorite: boolean;
+// }
 
 export default function HomeScreen() {
-  const router = useRouter();
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  // const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const { restaurants } = useRestaurantContext();
   const [showModal, setShowModal] = useState(false);
   const [displayData, setDisplayData] = useState<Restaurant>();
   const [selectionFunction, setSelectionFunction] = useState("");
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      const { data, error } = await supabase
-        .from('Restaurant')
-        .select('*');
+  // useEffect(() => {
+  //   const fetchRestaurants = async () => {
+  //     const { data, error } = await supabase
+  //       .from('Restaurant')
+  //       .select('*');
 
-      if (error) {
-        console.error('❌ Supabase fetch error:', error.message);
-        return;
-      }
+  //     if (error) {
+  //       console.error('❌ Supabase fetch error:', error.message);
+  //       return;
+  //     }
 
-      console.log("✅ Supabase data received:", data);
-      setRestaurants(data || []);
-    };
+  //     console.log("✅ Supabase data received:", data);
+  //     setRestaurants(data || []);
+  //   };
 
-    fetchRestaurants();
-  }, []);
+  //   fetchRestaurants();
+  // }, []);
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -54,8 +54,8 @@ export default function HomeScreen() {
   }
 
   const handleSelection = (data: Restaurant[], selectionType: string) => {
-    console.log(`🎯 Selection type: ${selectionType}`);
-    console.log("📋 Candidate list:", data);
+    // console.log(`🎯 Selection type: ${selectionType}`);
+    // console.log("📋 Candidate list:", data);
 
     setSelectionFunction(selectionType);
 
@@ -78,7 +78,7 @@ export default function HomeScreen() {
   };
 
   const selectRandomRestaurant = () => {
-    console.log("🍽️ All restaurants:", restaurants);
+    // console.log("🍽️ All restaurants:", restaurants);
     handleSelection(restaurants, "All");
   };
 
