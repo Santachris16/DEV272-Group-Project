@@ -33,12 +33,14 @@ export default function DeleteItemScreen() {
   return (
     <Box>
       <Heading size="3xl" className="self-center p-2">Delete {restaurant?.title}?</Heading>
-      <Button action='positive' onPress={handleDelete}>
-        <ButtonText>Yes</ButtonText>
-      </Button>
-      <Button action='negative' onPress={() => router.back()}>
-        <ButtonText>No</ButtonText>
-      </Button>
+      <Box className='m-4'>
+        <Button className='mb-4' action='positive' onPress={handleDelete}>
+          <ButtonText>Yes</ButtonText>
+        </Button>
+        <Button action='negative' onPress={() => router.back()}>
+          <ButtonText>No</ButtonText>
+        </Button>
+      </Box>
     </Box>
   );
 }

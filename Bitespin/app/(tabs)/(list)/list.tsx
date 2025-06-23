@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useRouter } from 'expo-router';
 import { FlatList } from 'react-native';
 import { Heading } from '@/components/ui/heading';
@@ -47,9 +47,9 @@ export default function ListScreen() {
       />
       <Fab
         size='lg'
-        className='bottom-32 dark:bg-zinc-700'
+        className='bottom-32 bg-green-400'
         onPress={() => router.push('/add')}>
-        <FabIcon as={AddIcon} color="white"></FabIcon>
+        <FabIcon as={AddIcon} color="black"></FabIcon>
       </Fab>
     </Box>
   );
