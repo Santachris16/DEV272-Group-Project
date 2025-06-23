@@ -54,5 +54,9 @@ Christian-	Supabase integration, routing setup, README, debugging,  UI layout
 Chris-	UI layout, styling, search, debugging, testing, Formiks setup, routing setup
 Nam- Create Login Authentication Flow, restructure login buttons, testing, debugging
 
+---
+
+## Final App Presentation
+Link - https://docs.google.com/presentation/d/1IorFUrEYDmstyaU4q5GgsGQreXZPILdRU7Jx3O0UfEU/edit?usp=sharing
 
 
