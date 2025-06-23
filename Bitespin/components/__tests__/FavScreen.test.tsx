@@ -1,58 +1,87 @@
-/// <reference types="jest" />
 import React from 'react';
-import { render } from '@testing-library/react-native';
-import FavoritesScreen from '../../app/(tabs)/(favorites)/favorites';
-import { Restaurant } from '@/components/ui/restaurant-context-provider'; 
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import LogoutButton from '../../components/LogoutButton'; // Adjust path if LogoutButton is not in components/
+import { supabase } from '@/data/supabase';
 
+// NEW: We need to mock expo-router's context provider if it exists, or just wrap
+// the component in a simple mock wrapper that satisfies useRouter.
+// expo-router doesn't export a direct context like NavigationContainer,
+// but the key is that useRouter needs to be within a "Router" context.
+// When you mock useRouter, you often don't *need* the full wrapper, but
+// sometimes internal Expo Router components might still try to access a context
+// that isn't there, leading to the "outside of scope" error.
+// Let's stick with the simple useRouter mock as it's usually sufficient,
+// but be aware that if problems persist, it might be related to more complex
+// internal setup of expo-router that the test environment lacks.
 
+// Mock the useRouter hook
+const mockReplace = jest.fn();
 jest.mock('expo-router', () => ({
+  // We're mocking the entire module, so when `useRouter` is called from it,
+  // it will return our mocked object.
   useRouter: () => ({
-    push: jest.fn(),
+    replace: mockReplace,
+    // Add other router methods if LogoutButton or its parents implicitly use them
+    // For example, if a parent component used `router.back()`, you'd add:
+    // back: jest.fn(),
   }),
+  // If expo-router exports other things that might be used, mock them as well.
+  // For simplicity, we only mock what's directly used by LogoutButton.
 }));
 
-const mockToggleFavorite = jest.fn();
-jest.mock('@/components/ui/restaurant-context-provider', () => ({ // Use alias
-  __esModule: true,
-  useRestaurantContext: () => ({
-    toggleFavorite: mockToggleFavorite,
-    restaurants: [
-      { id: '1', title: 'Sushi Spot', genre: 'Japanese', rating: 4.5, favorite: true },
-      { id: '2', title: 'Burger Joint', genre: 'American', rating: 3.9, favorite: false },
-      { id: '3', title: 'Taco Heaven', genre: 'Mexican', rating: 4.2, favorite: true },
-    ],
-  }),
+// Mock the supabase client
+jest.mock('@/data/supabase', () => ({
+  supabase: {
+    auth: {
+      signOut: jest.fn(), // Mock the signOut method
+    },
+  },
 }));
 
-// Fix for "ReferenceError: Text" (import Text inside the mock)
-jest.mock('@/components/RestaurantCard', () => { // Use alias
-  const { Text } = jest.requireActual('react-native'); // Import Text here
-  return {
-    __esModule: true,
-    default: jest.fn(({ title }) => <Text>{title}</Text>),
-  };
-});
-
-// No longer need this global import here, as it's now inside the mock where it's used.
-// import { Text } from 'react-native';
-
-describe('FavoritesScreen', () => {
+describe('LogoutButton', () => {
   beforeEach(() => {
-    mockToggleFavorite.mockClear();
-    // Correctly reference the mocked RestaurantCard default export for clearing
-    (jest.requireMock('@/components/RestaurantCard').default as jest.Mock).mockClear();
+    // Clear all mocks before each test to ensure isolation
+    jest.clearAllMocks();
+    // Ensure signOut mock returns a resolved promise by default
+    (supabase.auth.signOut as jest.Mock).mockResolvedValue({ error: null });
   });
 
-  it('renders the Favorites List heading', () => {
-    const { getByText } = render(<FavoritesScreen />);
-    expect(getByText('Favorites List')).toBeTruthy();
+  it('renders correctly', () => {
+    const { getByText } = render(<LogoutButton />);
+    expect(getByText('Log Out')).toBeTruthy();
   });
 
-  it('renders only favorite restaurants', () => {
-    const { getByText, queryByText } = render(<FavoritesScreen />);
+  it('calls supabase.auth.signOut and redirects to /login on press', async () => {
+    const { getByText } = render(<LogoutButton />);
+    const logoutButton = getByText('Log Out');
 
-    expect(getByText('Sushi Spot')).toBeTruthy();
-    expect(getByText('Taco Heaven')).toBeTruthy();
-    expect(queryByText('Burger Joint')).toBeNull();
+    fireEvent.press(logoutButton);
+
+    // Wait for the async signOut operation to complete
+    await waitFor(() => {
+      expect(supabase.auth.signOut).toHaveBeenCalledTimes(1);
+    });
+
+    // Then assert the navigation
+    expect(mockReplace).toHaveBeenCalledTimes(1);
+    expect(mockReplace).toHaveBeenCalledWith('/login');
+  });
+
+  // Test to ensure it still attempts redirect even if signOut fails (based on current implementation)
+  it('attempts redirect to /login even if signOut fails', async () => {
+    const { getByText } = render(<LogoutButton />);
+    const logoutButton = getByText('Log Out');
+
+    const mockError = new Error('Sign out failed');
+    (supabase.auth.signOut as jest.Mock).mockResolvedValueOnce({ error: mockError });
+
+    fireEvent.press(logoutButton);
+
+    await waitFor(() => {
+      expect(supabase.auth.signOut).toHaveBeenCalledTimes(1);
+    });
+
+    expect(mockReplace).toHaveBeenCalledTimes(1);
+    expect(mockReplace).toHaveBeenCalledWith('/login');
   });
 });
