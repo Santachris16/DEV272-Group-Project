@@ -14,7 +14,7 @@ DEV272 Group Project
 -  **Customizable Restaurant Entries**  
   Add, edit, and delete restaurants with fields like name, genre, location, and visit status.
 
-- ❤ **Favorites Tab**  
+-  **Favorites Tab**  
   Easily save and view your favorite spots.
 
 -  **Search Functionality**  
