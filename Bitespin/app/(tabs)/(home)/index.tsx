@@ -8,11 +8,14 @@ import { Text } from '@/components/ui/text';
 import React, { useState } from 'react';
 import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-context-provider';
 
+const placeholderImage = require('../../../assets/images/restaurantPlaceholder.png')
+
 export default function HomeScreen() {
   const { restaurants } = useRestaurantContext();
   const [showModal, setShowModal] = useState(false);
   const [displayData, setDisplayData] = useState<Restaurant>();
   const [selectionFunction, setSelectionFunction] = useState("");
+  const [imageSource, setImageSource] = useState<any>(placeholderImage);
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -35,6 +38,12 @@ export default function HomeScreen() {
       if (randomItem === displayData) {
         handleSelection(data, selectionType); // reroll if same
         return;
+      }
+
+      if (randomItem.photo) {
+        setImageSource({ uri: randomItem.photo });
+      } else {
+        setImageSource(placeholderImage);
       }
 
       console.log("✅ Selected restaurant:", randomItem);
@@ -93,8 +102,12 @@ export default function HomeScreen() {
             <Image
               className="rounded-xl m-4 mx-auto"
               size="2xl"
-              source={{ uri: displayData?.photo ?? 'https://via.placeholder.com/300' }}
+              source={imageSource}
               alt="image"
+              onError={ () => {
+                console.log("Image failed to load, falling back to placeholder.");
+                setImageSource(placeholderImage);  
+              }}
             />
             <Divider className="mb-2" />
             <Text>Genre: {displayData?.genre ?? "N/A"}</Text>
@@ -114,9 +127,8 @@ export default function HomeScreen() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      <Heading size="3xl" className="self-center mt-2">Bitespin</Heading>
-      <Text className="self-center">Random restaurant picker</Text>
+      <Heading size="3xl" className="self-center mt-2 dark:text-white">Bitespin</Heading>
+      <Text className="self-center dark:text-white">Random restaurant picker</Text>
       <Box className='flex'>
         <Image
           className='flex mx-auto'

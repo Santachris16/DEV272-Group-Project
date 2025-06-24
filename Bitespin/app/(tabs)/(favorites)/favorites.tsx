@@ -31,7 +31,7 @@ export default function FavoritesScreen() {
 
   return (
     <Box>
-      <Heading size="3xl" className="self-center p-2">
+      <Heading size="3xl" className="self-center p-2 dark:text-white">
         Favorites List
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">

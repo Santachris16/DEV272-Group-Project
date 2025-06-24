@@ -65,7 +65,7 @@ export default function AddItemScreen() {
           setFieldValue,
         }) => (
           <Box>
-            <Heading size="3xl" className="self-center p-2">Add Restaurant</Heading>
+            <Heading size="3xl" className="self-center p-2 dark:text-white">Add Restaurant</Heading>
             <Divider className='my-2 bg-black'></Divider>
             {/* Title Input */}
             <Text className='ml-2' bold={true}>Title:</Text>

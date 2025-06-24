@@ -65,8 +65,8 @@ export default function EditItemScreen() {
           touched,
           setFieldValue,
         }) => (
-          <Box>
-            <Heading size="3xl" className="self-center p-2">
+          <Box className='[&>*]:dark:text-white'>
+            <Heading size="3xl" className="self-center p-2 dark:text-white">
               Edit "{restaurant?.title}"
             </Heading>
             <Divider className='my-2 bg-black'></Divider>
