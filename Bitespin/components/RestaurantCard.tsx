@@ -15,7 +15,7 @@ export default function RestaurantCard({ id, title, genre, rating, favorite }: R
 
     return(
         <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/details/${id}`)}>
-            <Card size="md" variant="elevated" className="m-3">
+            <Card size="md" variant="elevated" className="m-3 bg-slate-300">
                 <HStack space="md" className="items-center">
                     <Box className='pl-2'>
                         <TouchableOpacity onPress={() => router.push(`/(tabs)/(list)/edit/${id}`)}>

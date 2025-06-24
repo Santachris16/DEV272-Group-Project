@@ -5,45 +5,14 @@ import { Heading } from '@/components/ui/heading';
 import { Image } from '@/components/ui/image';
 import { Modal, ModalBackdrop, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@/components/ui/modal';
 import { Text } from '@/components/ui/text';
-import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../../../data/supabase'; // adjust if needed
-
-export interface Restaurant {
-  id: number;
-  title: string;
-  genre: string;
-  location: string;
-  photo: string;
-  rating: number;
-  visited: boolean;
-  favorite: boolean;
-}
+import React, { useState } from 'react';
+import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-context-provider';
 
 export default function HomeScreen() {
-  const router = useRouter();
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const { restaurants } = useRestaurantContext();
   const [showModal, setShowModal] = useState(false);
   const [displayData, setDisplayData] = useState<Restaurant>();
   const [selectionFunction, setSelectionFunction] = useState("");
-
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      const { data, error } = await supabase
-        .from('Restaurant')
-        .select('*');
-
-      if (error) {
-        console.error('❌ Supabase fetch error:', error.message);
-        return;
-      }
-
-      console.log("✅ Supabase data received:", data);
-      setRestaurants(data || []);
-    };
-
-    fetchRestaurants();
-  }, []);
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -54,8 +23,8 @@ export default function HomeScreen() {
   }
 
   const handleSelection = (data: Restaurant[], selectionType: string) => {
-    console.log(`🎯 Selection type: ${selectionType}`);
-    console.log("📋 Candidate list:", data);
+    // console.log(`🎯 Selection type: ${selectionType}`);
+    // console.log("📋 Candidate list:", data);
 
     setSelectionFunction(selectionType);
 
@@ -78,7 +47,7 @@ export default function HomeScreen() {
   };
 
   const selectRandomRestaurant = () => {
-    console.log("🍽️ All restaurants:", restaurants);
+    // console.log("🍽️ All restaurants:", restaurants);
     handleSelection(restaurants, "All");
   };
 
@@ -148,18 +117,28 @@ export default function HomeScreen() {
 
       <Heading size="3xl" className="self-center mt-2">Bitespin</Heading>
       <Text className="self-center">Random restaurant picker</Text>
-      <Box className="flex-1 p-1 ml-2 mr-2">
-        <Button className="flex-1 m-2 rounded-2xl" onPress={selectRandomRestaurant}>
-          <ButtonText>Random Restaurant</ButtonText>
+      <Box className='flex'>
+        <Image
+          className='flex mx-auto'
+          size='2xl'
+          source={{
+            uri: 'https://cdn.pixabay.com/photo/2021/12/16/03/04/spin-the-wheel-6873663_1280.png'
+          }}
+          alt="Spinning wheel image"
+        />
+      </Box>
+      <Box className="flex-1 p-1 mx-2">
+        <Button className="bg-slate-300 flex-1 mx-2 mb-2 rounded-2xl" onPress={selectRandomRestaurant}>
+          <ButtonText className='text-black'>Random Restaurant</ButtonText>
         </Button>
-        <Button className="flex-1 m-2 rounded-2xl" onPress={selectRandomFavorite}>
-          <ButtonText>Random Favorite</ButtonText>
+        <Button className="bg-slate-300 flex-1 m-2 rounded-2xl" onPress={selectRandomFavorite}>
+          <ButtonText className='text-black'>Random Favorite</ButtonText>
         </Button>
-        <Button className="flex-1 m-2 rounded-2xl" onPress={selectRandomUnvisited}>
-          <ButtonText>Random Unvisited</ButtonText>
+        <Button className="bg-slate-300 flex-1 m-2 rounded-2xl" onPress={selectRandomUnvisited}>
+          <ButtonText className='text-black'>Random Unvisited</ButtonText>
         </Button>
-        <Button className="flex-1 m-2 rounded-2xl" onPress={selectRandomVisited}>
-          <ButtonText>Random Visited</ButtonText>
+        <Button className="bg-slate-300 flex-1 m-2 rounded-2xl" onPress={selectRandomVisited}>
+          <ButtonText className='text-black'>Random Visited</ButtonText>
         </Button>
       </Box>
     </Box>
