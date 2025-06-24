@@ -7,6 +7,7 @@ import { Modal, ModalBackdrop, ModalBody, ModalContent, ModalFooter, ModalHeader
 import { Text } from '@/components/ui/text';
 import React, { useState } from 'react';
 import { Restaurant, useRestaurantContext } from '@/components/ui/restaurant-context-provider';
+
 const placeholderImage = require('../../../assets/images/restaurantPlaceholder.png')
 
 export default function HomeScreen() {
@@ -15,7 +16,6 @@ export default function HomeScreen() {
   const [displayData, setDisplayData] = useState<Restaurant>();
   const [selectionFunction, setSelectionFunction] = useState("");
   const [imageSource, setImageSource] = useState<any>(placeholderImage);
-
 
   function getRandomNumber(maxValue: number): number {
     if (maxValue <= 0) {
@@ -127,7 +127,6 @@ export default function HomeScreen() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
       <Heading size="3xl" className="self-center mt-2 dark:text-white">Bitespin</Heading>
       <Text className="self-center dark:text-white">Random restaurant picker</Text>
       <Box className='flex'>
