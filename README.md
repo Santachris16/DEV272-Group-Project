@@ -27,6 +27,28 @@ DEV272 Group Project
   Real-time cloud database for storing restaurant data.
 
 ---
+##  Testing
+
+- Testing:
+  - Running `npx expo start` and launching in a simulator or device. - Pass
+  - Navigating to each tab: Home, Favorites, Add - Pass
+  - Random restaurant generation - Pass
+  - Adding/editing/deleting items - Kinda working, some delay to this, but it works
+  - Form validation (try submitting incomplete forms) - Pass
+  - Search functionality in the list view - Pass
+
+---
+
+## Known Issues
+
+- Delay in adding and editing restaurants
+- Users can sometimes access the list after logging out
+- Users can sometimes access list without logging in
+
+
+
+
+---
 
 ##  Tech Stack
 
