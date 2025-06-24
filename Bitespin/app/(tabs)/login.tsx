@@ -48,11 +48,12 @@ export default function AuthScreen() {
 
   return (
     <View style={{ padding: 16 }}>
-      <Text style={{ fontSize: 24, marginBottom: 16 }}>
+      <Text className='dark:text-white' style={{ fontSize: 24, marginBottom: 16 }}>
         {isRegistering ? 'Register' : 'Login'}
       </Text>
 
       <TextInput
+        className='bg-white'
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
@@ -62,6 +63,7 @@ export default function AuthScreen() {
       />
 
       <TextInput
+        className='bg-white'
         placeholder="Password"
         value={password}
         onChangeText={setPassword}

@@ -16,7 +16,7 @@ export default function DetailsScreen() {
   return (
 
     <Box className='flex-1'>
-      <Heading size="3xl" className="self-center p-2">{restaurant?.title}</Heading>
+      <Heading size="3xl" className="self-center p-2 dark:text-white">{restaurant?.title}</Heading>
       {restaurant?.favorite ?
         <Icon
           as={FavouriteIcon}
@@ -35,7 +35,7 @@ export default function DetailsScreen() {
           alt="image"
         />
       </Box>
-      <Box className='flex-1 p-4'>
+      <Box className='flex-1 p-4 [&>*]:dark:text-white'>
         <Text>Genre: {restaurant?.genre}</Text>
         <Text>Location: {restaurant?.location}</Text>
         <Text>Rating: {restaurant?.rating}</Text>

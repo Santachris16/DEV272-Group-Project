@@ -128,8 +128,8 @@ export default function HomeScreen() {
         </ModalContent>
       </Modal>
 
-      <Heading size="3xl" className="self-center mt-2">Bitespin</Heading>
-      <Text className="self-center">Random restaurant picker</Text>
+      <Heading size="3xl" className="self-center mt-2 dark:text-white">Bitespin</Heading>
+      <Text className="self-center dark:text-white">Random restaurant picker</Text>
       <Box className='flex'>
         <Image
           className='flex mx-auto'

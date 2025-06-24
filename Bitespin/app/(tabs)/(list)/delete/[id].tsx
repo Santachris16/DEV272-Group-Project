@@ -32,7 +32,7 @@ export default function DeleteItemScreen() {
 
   return (
     <Box>
-      <Heading size="3xl" className="self-center p-2">Delete {restaurant?.title}?</Heading>
+      <Heading size="3xl" className="self-center p-2 dark:text-white">Delete {restaurant?.title}?</Heading>
       <Box className='m-4'>
         <Button className='mb-4' action='positive' onPress={handleDelete}>
           <ButtonText>Yes</ButtonText>

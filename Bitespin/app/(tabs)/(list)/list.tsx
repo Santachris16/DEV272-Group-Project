@@ -30,7 +30,7 @@ export default function ListScreen() {
 
   return (
     <Box>
-      <Heading size="3xl" className="self-center p-2">
+      <Heading size="3xl" className="self-center p-2 dark:text-white">
         Restaurant List
       </Heading>
       <Input variant="outline" size="lg" className="m-2 bg-white">
